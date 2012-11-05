@@ -405,14 +405,10 @@ if ( ! class_exists( 'GrabPress' ) ) {
 			if ( $api_key != '' ) {
 				$validate_json = GrabPress::api_call( 'GET', '/user/validate?api_key='.$api_key );
 				$validate_data = json_decode( $validate_json );
-				if (  isset( $validate_data -> error ) ) {
-					return GrabPress::create_API_connection();
-				}else {
+				if (!isset( $validate_data -> error ) ) {
 					GrabPress::$api_key = $api_key;
 					return true;
 				}
-			}else {
-				return GrabPress::create_API_connection();
 			}
 			return false;
 		}
@@ -537,7 +533,9 @@ if ( ! class_exists( 'GrabPress' ) ) {
 
 		static function setup() {
 			GrabPress::log();
-			GrabPress::validate_key();
+			if(!GrabPress::validate_key()){
+				GrabPress::create_API_connection();
+			}
 			GrabPress::enable_xmlrpc();
 		}
 
