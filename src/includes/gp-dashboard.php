@@ -361,14 +361,22 @@
 			width = width.replace("px","");
 			jQuery(".accordion-inner").css("height", width* 0.5625 )
 		}
+		function resize_height(){
+			$(".wrap").css("min-height",
+				$(window).height() 
+				- $(".wpadminbar").height() 
+				- $(".update-nag").height() 
+				- $("#wpfooter").height()
+				- $("#wpbody-content").css("padding-bottom").replace("px", "")
+			);
+		}
 
 		function init(){
 			watchlist_binding();
 			accordion_binding('<?php echo GrabPress::$environment; ?>', <?php echo $embed_id ?>);
 			$(".nano").nanoScroller({"alwaysVisible":true});
-
 			$(window).resize(resize_accordion).resize();
-			
+			$(window).resize(resize_height).resize();
 		}
 		init();
 
