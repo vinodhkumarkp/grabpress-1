@@ -201,7 +201,7 @@
 								</div>
 							</div>
 						</div>
-						<div clas="row-fluid">
+						<div class="row-fluid faq-container" >
 							<div class="span12 faq">
 								<div class="tabbable panel">
 									<ul class="nav nav-tabs">
@@ -370,13 +370,20 @@
 				- $("#wpbody-content").css("padding-bottom").replace("px", "")
 			);
 		}
+		function resize_resources(){
+			$(".faq").css("min-height", 
+				$(".wrap").css("min-height").replace("px", "") 
+				- $(".wrap img").height()
+				- $(".right-pane .row-fluid").height()
+				);
+		}
 
 		function init(){
 			watchlist_binding();
 			accordion_binding('<?php echo GrabPress::$environment; ?>', <?php echo $embed_id ?>);
 			$(".nano").nanoScroller({"alwaysVisible":true});
-			$(window).resize(resize_accordion).resize();
-			$(window).resize(resize_height).resize();
+			$(window).resize(resize_accordion).resize(resize_height).resize(resize_resources).resize();
+
 		}
 		init();
 

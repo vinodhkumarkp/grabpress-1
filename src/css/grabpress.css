@@ -862,7 +862,7 @@ line-height: 24px;
 
 #t #b .faq {
     margin-left: 0 !important;
-    width: 752px;
+    width: 752px !important;
 }
 #t #b .span4 {
     width: 31.6239%\9 !important;
